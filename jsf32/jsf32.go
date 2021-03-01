@@ -54,8 +54,8 @@ func (j *JSF32) Seed(seed int64) {
 
 // Uint32 returns a pseudorandom value in [0, 1<<32)
 func (j *JSF32) Uint32() uint32 {
-	e := j.a - rot32l(j.b, 27)
-	j.a = j.b ^ rot32l(j.c, 17)
+	e := j.a - rotl32(j.b, 27)
+	j.a = j.b ^ rotl32(j.c, 17)
 	j.b = j.c + j.d
 	j.c = j.d + e
 	j.d = e + j.a
@@ -69,6 +69,6 @@ func (j *JSF32) Uint64() uint64 {
 	return (x << 32) | y
 }
 
-func rot32l(x, k uint32) uint32 {
+func rotl32(x, k uint32) uint32 {
 	return (x << k) | (x >> (32 - k))
 }

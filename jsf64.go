@@ -58,14 +58,14 @@ func (j *JSF64) Uint32() uint32 {
 
 // Uint64 returns a pseudorandom value in [0, 1<<64)
 func (j *JSF64) Uint64() uint64 {
-	e := j.a - (rot64l(j.b, 7))
-	j.a = j.b ^ rot64l(j.c, 13)
-	j.b = j.c + rot64l(j.d, 37)
+	e := j.a - (rotl64(j.b, 7))
+	j.a = j.b ^ rotl64(j.c, 13)
+	j.b = j.c + rotl64(j.d, 37)
 	j.c = j.d + e
 	j.d = e + j.a
 	return j.d
 }
 
-func rot64l(x, k uint64) uint64 {
+func rotl64(x, k uint64) uint64 {
 	return (x << k) | (x >> (64 - k))
 }
